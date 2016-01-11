@@ -1,10 +1,15 @@
-# Pyculator v.1.0
+# Pyculator v.1.1
 # Created by Flores
 # 11-01-2016
 
 
 import sys
 from PyQt5.QtWidgets import *
+
+
+width = 160
+height = 220
+btnSize = width/4
 
 total = 0.0
 number = 0.0
@@ -23,7 +28,7 @@ class App(QWidget):
 
     def initUI(self):
         self.tablo = QLCDNumber(self)
-        self.tablo.setGeometry(0, 0, 161, 21)
+        self.tablo.setGeometry(0, 0, width, height - btnSize * 5)
         self.tablo.setSmallDecimalPoint(True)
         self.tablo.setDigitCount(13)
         self.tablo.setDecMode()
@@ -33,67 +38,67 @@ class App(QWidget):
         self.tablo.setSegmentStyle(QLCDNumber.Flat)
 
         self.b0 = QPushButton('0', self)
-        self.b0.setGeometry(0, 180, 81, 41)
+        self.b0.setGeometry(0, 180, btnSize * 2, btnSize)
 
         self.b1 = QPushButton('1', self)
-        self.b1.setGeometry(0, 140, 41, 41)
+        self.b1.setGeometry(0, 140, btnSize, btnSize)
 
         self.b2 = QPushButton('2', self)
-        self.b2.setGeometry(40, 140, 41, 41)
+        self.b2.setGeometry(40, 140, btnSize, btnSize)
 
         self.b3 = QPushButton('3', self)
-        self.b3.setGeometry(80, 140, 41, 41)
+        self.b3.setGeometry(80, 140, btnSize, btnSize)
 
         self.b4 = QPushButton('4', self)
-        self.b4.setGeometry(0, 100, 41, 41)
+        self.b4.setGeometry(0, 100, btnSize, btnSize)
 
         self.b5 = QPushButton('5', self)
-        self.b5.setGeometry(40, 100, 41, 41)
+        self.b5.setGeometry(40, 100, btnSize, btnSize)
 
         self.b6 = QPushButton('6', self)
-        self.b6.setGeometry(80, 100, 41, 41)
+        self.b6.setGeometry(80, 100, btnSize, btnSize)
 
         self.b7 = QPushButton('7', self)
-        self.b7.setGeometry(0, 60, 41, 41)
+        self.b7.setGeometry(0, 60, btnSize, btnSize)
 
         self.b8 = QPushButton('8', self)
-        self.b8.setGeometry(40, 60, 41, 41)
+        self.b8.setGeometry(40, 60, btnSize, btnSize)
 
         self.b9 = QPushButton('9', self)
-        self.b9.setGeometry(80, 60, 41, 41)
+        self.b9.setGeometry(80, 60, btnSize, btnSize)
 
         self.bPoint = QPushButton('.', self)
-        self.bPoint.setGeometry(80, 180, 41, 41)
+        self.bPoint.setGeometry(80, 180, btnSize, btnSize)
         self.bPoint.clicked.connect(self.Point)
 
         self.bEquals = QPushButton('=', self)
-        self.bEquals.setGeometry(120, 140, 41, 81)
+        self.bEquals.setGeometry(120, 140, btnSize, btnSize * 2)
         self.bEquals.clicked.connect(self.Equals)
 
         self.bPlus = QPushButton('+', self)
-        self.bPlus.setGeometry(120, 100, 41, 41)
+        self.bPlus.setGeometry(120, 100, btnSize, btnSize)
 
         self.bMinus = QPushButton('-', self)
-        self.bMinus.setGeometry(120, 60, 41, 41)
+        self.bMinus.setGeometry(120, 60, btnSize, btnSize)
 
         self.bMul = QPushButton('*', self)
-        self.bMul.setGeometry(120, 20, 41, 41)
+        self.bMul.setGeometry(120, 20, btnSize, btnSize)
 
         self.bDiv = QPushButton('/', self)
-        self.bDiv.setGeometry(80, 20, 41, 41)
+        self.bDiv.setGeometry(80, 20, btnSize, btnSize)
 
         self.bClear = QPushButton('C', self)
-        self.bClear.setGeometry(0, 20, 41, 41)
+        self.bClear.setGeometry(0, 20, btnSize, btnSize)
         self.bClear.clicked.connect(self.Clear)
 
         self.bSign = QPushButton('+/-', self)
-        self.bSign.setGeometry(40, 20, 41, 41)
+        self.bSign.setGeometry(40, 20, btnSize, btnSize)
         self.bSign.clicked.connect(self.Sign)
 
         self.setWindowTitle('Pyculator')
-        self.setGeometry(0, 0, 161, 220)
-        self.setFixedSize(161, 220)
-        self.move(161, 220)
+        self.setGeometry(0, 0, width, height)
+        self.setFixedSize(width, height)
+        self.move(width, height)
         self.show()
 
 
@@ -151,7 +156,7 @@ class App(QWidget):
 
     def Equals(self):
         global number, number2, total, op, operator, forPoint, dot
-
+            
         if operator == '+':
             total = float(number) + float(number2)
         elif operator == '-':
@@ -159,7 +164,10 @@ class App(QWidget):
         elif operator == '*':
             total = float(number) * float(number2)
         elif operator == '/':
-            total = float(number) / float(number2)
+            if number2 == 0:
+                total = 'ERR'
+            else:
+                total = float(number) / float(number2)
 
         op = False
         number2 = 0.0

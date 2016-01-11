@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['pyculator.py'],
-             pathex=['/home/flores/mysrc/pyculator'],
+             pathex=['/home/flores/flores/pyculator'],
              binaries=None,
              datas=None,
              hiddenimports=[],
