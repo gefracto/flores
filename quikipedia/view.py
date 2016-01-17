@@ -47,6 +47,7 @@ class Ui_MainWindow(object):
 
     def SearchFor(self):
         global request, title, page
+        self.textField.clear()
         request = self.lineEdit.text()
         ls = wikipedia.search(request, results=3)
         title = ls[0]
